@@ -98,7 +98,7 @@ curl -fsSL https://tailscale.com/install.sh | sh
 # Install packages
 # 'root' user by your cloud provider (e.g., Linode, Vultr).
 #################################################################
-cat << 'EOF' > "$PROFILE"
+cat << 'EOF' >> "${PROFILE}"
 export IS_SANDBOX=1;
 alias omnara="export IS_SANDBOX=1; omnara --dangerously-skip-permissions"
 alias yolo="claude --dangerously-skip-permissions"
@@ -106,7 +106,7 @@ alias t="tmux a -d
 EOF
 
 # Make the newly created script executable (optional, but good practice)
-chmod +x "$PROFILE"
+chmod +x "${PROFILE}"
 
 
 #################################################################
@@ -153,6 +153,7 @@ curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt-get install -y nodejs
 npm install -g lighthouse \
 	@anthropic-ai/claude-code \
+	http.server \
 	--loglevel info \
 	--force
 
@@ -164,9 +165,6 @@ pip install omnara
 
 # Install tailscale
 curl -fsSL https://tailscale.com/install.sh | sh
-
-# Aliases
-alias omnara="export IS_SANDBOX=1; omnara --dangerously-skip-permissions"
 
 # final updates
 npm update -g

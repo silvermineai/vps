@@ -1,14 +1,23 @@
 # VPS
 Inspired by https://github.com/MarcoWorms/vibecoder-fullstack-vps-quickstart.
 
+Security:
+1. Sets up new user 
+1. Enable ufp
+1. Relies on pre-configured hetzner firewall
+
+Other benefits
+1. Sets up ssh key (pre-installed on hetzner)
+1. sets up tailscale ssh
+1. installs claude code and omnara
+
 ```
 curl -sSL https://raw.githubusercontent.com/silvermineai/vps/main/startup.sh | sudo bash
 ```
 
-
-# One-time Setup
+# First-time, One-tie Hetzner Setup
 1. Open console.hetzner.com: create a new dashboard.
-1. Create SSH key in 1password. Then download OpenSSH and save as `~/.ssh/hetzner`.
+1. Create SSH key on computer (or in 1password). Then download as OpenSSH and save as `~/.ssh/hetzner`.
 1. Upload public key to https://console.hetzner.com/projects/11620163/security/sshkeys, nanme it "Hetzner"
 1. Set up firewalls: https://console.hetzner.com/projects/11620163/firewalls. Only allow 22.
 1. Go to security/api tokens to get an api token: https://console.hetzner.com/projects/11620163/security/tokens
@@ -51,11 +60,12 @@ hcloud server create \
 1. Set up [tailscale ssh](https://tailscale.com/kb/1193/tailscale-ssh)
 1. Log in with `ssh root@ubuntu-2gb-hil-1` (change the name and what not).
 
-# Fastest mode (using my git config)
+# Fastest mode (using my own)
 ```
 export name=wfp
 hnew ${name}
-ssh-add-host ${name} root@5.78.142.173 ~/.ssh/hetzner
+export IP=2a01:4ff:1f0:c9dc::1
+ssh-add-host ${name} root@${IP} ~/.ssh/hetzner
 ssh wfp
 ```
 
