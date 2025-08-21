@@ -125,6 +125,15 @@ ghlogin() {
   # Pipe the token from the variable into the gh auth login command.
   echo "$PAT" | gh auth login --git-protocol https --hostname github.com --with-token
 }
+
+# clone repos
+ghpull() {
+  gh repo clone silvermine-ai/mywealth.silvermine.ai
+  gh repo clone silvermine-ai/nde.silvermine.ai
+  gh repo clone silvermine-ai/do.silvermine.ai
+  gh repo clone silvermine-ai/www.silvermine.ai
+  gh repo clone silvermine-ai/familiawindows.silvermine.ai
+}
 EOF
 
 # Make the newly created script executable (optional, but good practice)
@@ -191,12 +200,7 @@ tailscale up --ssh
 ghlogin
 
 
-# clone repos
-gh repo clone silvermine-ai/mywealth.silvermine.ai
-gh repo clone silvermine-ai/nde.silvermine.ai
-gh repo clone silvermine-ai/do.silvermine.ai
-gh repo clone silvermine-ai/www.silvermine.ai
-gh repo clone silvermine-ai/familiawindows.silvermine.ai
+
 
 #################################################################
 # Authentication
