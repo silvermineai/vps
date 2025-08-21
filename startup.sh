@@ -154,12 +154,14 @@ echo "✅ GitHub CLI installed."
 # apt install -y google-chrome-stable
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /usr/share/keyrings/google-chrome-keyring.gpg
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-sudo apt-get -y install google-chrome-stable
+apt-get update
+apt-get -y install google-chrome-stable
 echo "✅ Google Chrome installed."
 
 # Install npm
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt-get install -y nodejs
+apt-get update
+apt-get install -y nodejs
 npm install -g lighthouse \
 	@anthropic-ai/claude-code \
 	http.server \
