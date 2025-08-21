@@ -54,10 +54,12 @@ echo "✅ Firewall enabled."
 # --- 4. Hardening SSH Daemon ---
 # Remove root login, password login, and challenge response authentication.
 echo "--- Hardening SSH Daemon ---"
-sed -i "s/^#?Port .*/Port $SSH_PORT/" /etc/ssh/sshd_config
-sed -i "s/^#?PermitRootLogin .*/PermitRootLogin no/" /etc/ssh/sshd_config
-sed -i "s/^#?PasswordAuthentication .*/PasswordAuthentication no/" /etc/ssh/sshd_config
-sed -i "s/^#?ChallengeResponseAuthentication .*/ChallengeResponseAuthentication no/" /etc/ssh/sshd_config
+# sed -i "s/^#?Port 22 .*/Port $SSH_PORT/" /etc/ssh/sshd_config
+sed -i "s/^#PermitEmptyPasswords no/PermitEmptyPasswords no/" /etc/ssh/sshd_config
+sed -i "s/^#PermitRootLogin prohibit-password/PermitRootLogin no/" /etc/ssh/sshd_config
+sed -i "s/^#PasswordAuthentication yes/PasswordAuthentication no/" /etc/ssh/sshd_config
+# ChallengeResponseAuthentication is not in the settings:
+echo "ChallengeResponseAuthentication no" >> /etc/ssh/sshd_config
 # We keep PubkeyAuthentication and UsePAM enabled for broader compatibility
 systemctl restart sshd
 echo "✅ SSH daemon hardened."
@@ -174,19 +176,19 @@ apt install -y python3 python3-pip python3-venv
 python3 -m venv .venv
 source .venv/bin/activate # activate the virtual environment
 pip install omnara
+deactivate
 echo "✅ Omnara installed."
 
 # final updates
 npm update -g
 sudo apt-get -y update
 
-
 # start tmux session
 # set up tailscale ssh
-sudo -u $NEW_USER tailscale up --ssh
+tailscale up --ssh
 
 # note: this requires a server with ipv4 enabled, as github doesn't support ipv6 yet (2025-08-21)
-sudo -u $NEW_USER ghlogin
+ghlogin
 
 
 # clone repos
