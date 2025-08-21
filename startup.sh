@@ -14,7 +14,7 @@ set -e
 NEW_USER="b"
 # can't change the tailscale port of 22, best practice is > 50000, but we're using 22.
 SSH_PORT="22"
-PROFILE="~/.bashrc"
+PROFILE="/home/$NEW_USER/.bashrc"
 
 # -----------------------------------------
 
@@ -92,17 +92,19 @@ echo "🎉 Server Hardening Complete! 🎉"
 # --- 7. Install tailscale ---
 echo "--- Installing Tailscale ---"
 curl -fsSL https://tailscale.com/install.sh | sh
+echo "✅ Tailscale installed."
 
 
 #################################################################
 # Install packages
 # 'root' user by your cloud provider (e.g., Linode, Vultr).
 #################################################################
-sudo -u $NEW_USER cat << 'EOF' >> "${PROFILE}"
+# had to hard-code the profile path for some reason as ${PROFILE} was not working
+cat << 'EOF' >> /home/b/.bashrc
 export IS_SANDBOX=1;
 alias omnara="export IS_SANDBOX=1; omnara --dangerously-skip-permissions"
 alias yolo="claude --dangerously-skip-permissions"
-alias t="tmux a -d
+alias t="tmux a -d"
 
 ghlogin() {
   local PAT
@@ -121,7 +123,6 @@ ghlogin() {
   # Pipe the token from the variable into the gh auth login command.
   echo "$PAT" | gh auth login --git-protocol https --hostname github.com --with-token
 }
-
 EOF
 
 # Make the newly created script executable (optional, but good practice)
@@ -172,10 +173,6 @@ python3 -m venv .venv
 source .venv/bin/activate # activate the virtual environment
 pip install omnara
 echo "✅ Omnara installed."
-
-# Install tailscale
-curl -fsSL https://tailscale.com/install.sh | sh
-echo "✅ Tailscale installed."
 
 # final updates
 npm update -g
