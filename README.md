@@ -1,7 +1,9 @@
 # VPS
 Inspired by https://github.com/MarcoWorms/vibecoder-fullstack-vps-quickstart.
 
+```
 curl -sSL https://raw.githubusercontent.com/silvermineai/vps/main/startup.sh | sudo bash
+```
 
 
 # One-time Setup
