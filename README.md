@@ -64,9 +64,10 @@ hcloud server create \
 ```
 export name=wfp
 hnew ${name}
-export IP=2a01:4ff:1f0:c9dc::1
+export IP=5.78.41.48
 ssh-add-host ${name} root@${IP} ~/.ssh/hetzner
 ssh wfp
+curl -sSL https://raw.githubusercontent.com/silvermineai/vps/main/startup.sh | sudo bash
 ```
 
 
