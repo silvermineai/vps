@@ -98,7 +98,7 @@ curl -fsSL https://tailscale.com/install.sh | sh
 # Install packages
 # 'root' user by your cloud provider (e.g., Linode, Vultr).
 #################################################################
-cat << 'EOF' >> "${PROFILE}"
+sudo -u $NEW_USER cat << 'EOF' >> "${PROFILE}"
 export IS_SANDBOX=1;
 alias omnara="export IS_SANDBOX=1; omnara --dangerously-skip-permissions"
 alias yolo="claude --dangerously-skip-permissions"
@@ -177,10 +177,10 @@ sudo apt-get -y update
 # start tmux session
 tmux
 # set up tailscale ssh
-tailscale up --ssh
+sudo -u $NEW_USER tailscale up --ssh
 
 # note: this requires a server with ipv4 enabled, as github doesn't support ipv6 yet (2025-08-21)
-ghlogin
+sudo -u $NEW_USER ghlogin
 
 # clone repos
 gh repo clone silvermine-ai/mywealth.silvermine.ai
