@@ -89,7 +89,6 @@ APT::Periodic::AutocleanInterval "7";
 APT::Periodic::Unattended-Upgrade "1";
 EOL
 echo "✅ Automatic security updates enabled."
-echo "🎉 Server Hardening Complete! 🎉"
 
 # --- 7. Install tailscale ---
 echo "--- Installing Tailscale ---"
@@ -97,6 +96,7 @@ curl -fsSL https://tailscale.com/install.sh | sh
 echo "✅ Tailscale installed."
 
 
+echo "🎉 Server Hardening Complete! 🎉"
 #################################################################
 # Install packages
 # 'root' user by your cloud provider (e.g., Linode, Vultr).
@@ -130,11 +130,11 @@ ghlogin() {
 
 # clone repos
 ghpull() {
-  gh repo clone silvermine-ai/mywealth.silvermine.ai
-  gh repo clone silvermine-ai/nde.silvermine.ai
-  gh repo clone silvermine-ai/do.silvermine.ai
-  gh repo clone silvermine-ai/www.silvermine.ai
-  gh repo clone silvermine-ai/familiawindows.silvermine.ai
+  gh repo clone silvermineai/mywealth.silvermine.ai
+  gh repo clone silvermineai/nde.silvermine.ai
+  gh repo clone silvermineai/do.silvermine.ai
+  gh repo clone silvermineai/www.silvermine.ai
+  gh repo clone silvermineai/familiawindows.silvermine.ai
 }
 EOF
 
@@ -181,20 +181,23 @@ echo "✅ Node.js installed, and lighthouse, claude-code, http.server installed.
 
 # Install python
 apt install -y python3 python3-pip python3-venv
-python3 -m venv .venv
-source .venv/bin/activate # activate the virtual environment
+python3 -m venv /home/b/.venv
+source /home/b/.venv/bin/activate # activate the virtual environment
 pip install omnara
 deactivate
 echo "✅ Omnara installed."
 
 # final updates
+echo "--- Final Updates ---"
 npm update -g
 sudo apt-get -y update
+echo "✅ Final Updates Complete."
 
 # start tmux session
 # set up tailscale ssh
+echo "--- Starting Tailscale ---"
 tailscale up --ssh
-
+echo "✅ Tailscale Started."
 
 #################################################################
 # Start Running
