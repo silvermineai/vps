@@ -181,8 +181,8 @@ echo "✅ Node.js installed, and lighthouse, claude-code, http.server installed.
 
 # Install python
 apt install -y python3 python3-pip python3-venv
-python3 -m venv /home/b/.venv
-source /home/b/.venv/bin/activate # activate the virtual environment
+python3 -m venv /home/${NEW_USER}/.venv
+source /home/${NEW_USER}/.venv/bin/activate # activate the virtual environment
 pip install omnara
 deactivate
 echo "✅ Omnara installed."
