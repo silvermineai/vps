@@ -162,9 +162,9 @@ echo "✅ Google Chrome installed."
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 apt-get update
 apt-get install -y nodejs
-npm install -g lighthouse \
+npm install --global lighthouse \
 	@anthropic-ai/claude-code \
-	http.server \
+	http-server \
 	--loglevel info \
 	--force
 echo "✅ Node.js installed, and lighthouse, claude-code, http.server installed."
@@ -185,12 +185,13 @@ sudo apt-get -y update
 # 'root' user by your cloud provider (e.g., Linode, Vultr).
 #################################################################
 # start tmux session
-tmux
 # set up tailscale ssh
 sudo -u $NEW_USER tailscale up --ssh
 
 # note: this requires a server with ipv4 enabled, as github doesn't support ipv6 yet (2025-08-21)
 sudo -u $NEW_USER ghlogin
+
+tmux
 
 # clone repos
 gh repo clone silvermine-ai/mywealth.silvermine.ai
