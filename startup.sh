@@ -108,6 +108,8 @@ alias omnara="export IS_SANDBOX=1; omnara --dangerously-skip-permissions"
 alias yolo="claude --dangerously-skip-permissions"
 alias t="tmux a -d"
 
+
+# note: gh requires a server with ipv4 enabled, as github doesn't support ipv6 yet (2025-08-21)
 ghlogin() {
   local PAT
   # Prompt the user to enter their token, -s makes the input silent (secure).
@@ -141,8 +143,6 @@ chmod +x "${PROFILE}"
 
 echo "✅ Profile ${PROFILE} updated."
 
-
-
 #################################################################
 # Install packages
 # 'root' user by your cloud provider (e.g., Linode, Vultr).
@@ -158,7 +158,6 @@ echo "✅ Profile ${PROFILE} updated."
 	&& sudo apt update \
 	&& sudo apt install gh -y
 echo "✅ GitHub CLI installed."
-
 
 
 # Install Google Chrome and all dependencies (for google lighthouse)
@@ -196,16 +195,13 @@ sudo apt-get -y update
 # set up tailscale ssh
 tailscale up --ssh
 
-# note: this requires a server with ipv4 enabled, as github doesn't support ipv6 yet (2025-08-21)
-ghlogin
-
-
-
 
 #################################################################
-# Authentication
+# Start Running
 # 'root' user by your cloud provider (e.g., Linode, Vultr).
 #################################################################
 tmux
+# ghlogin
+# ghpull
 # cd mywealth.silvermine.ai
 # omnara
