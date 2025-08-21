@@ -103,6 +103,25 @@ export IS_SANDBOX=1;
 alias omnara="export IS_SANDBOX=1; omnara --dangerously-skip-permissions"
 alias yolo="claude --dangerously-skip-permissions"
 alias t="tmux a -d
+
+ghlogin() {
+  local PAT
+  # Prompt the user to enter their token, -s makes the input silent (secure).
+  echo -n "🔑 Paste your GitHub PAT: "
+  read -s PAT
+  # Echo a newline for cleaner formatting after the hidden input.
+  echo
+
+  # Check if a token was actually entered.
+  if [ -z "$PAT" ]; then
+    echo "No token provided. Aborting."
+    return 1
+  fi
+
+  # Pipe the token from the variable into the gh auth login command.
+  echo "$PAT" | gh auth login --git-protocol https --hostname github.com --with-token
+}
+
 EOF
 
 # Make the newly created script executable (optional, but good practice)
@@ -124,23 +143,7 @@ chmod +x "${PROFILE}"
 	&& sudo apt update \
 	&& sudo apt install gh -y
 
-ghlogin() {
-  local PAT
-  # Prompt the user to enter their token, -s makes the input silent (secure).
-  echo -n "🔑 Paste your GitHub PAT: "
-  read -s PAT
-  # Echo a newline for cleaner formatting after the hidden input.
-  echo
 
-  # Check if a token was actually entered.
-  if [ -z "$PAT" ]; then
-    echo "No token provided. Aborting."
-    return 1
-  fi
-
-  # Pipe the token from the variable into the gh auth login command.
-  echo "$PAT" | gh auth login --git-protocol https --hostname github.com --with-token
-}
 
 # Install Google Chrome and all dependencies (for google lighthouse)
 # apt install -y google-chrome-stable
