@@ -180,10 +180,7 @@ echo "✅ Omnara installed."
 npm update -g
 sudo apt-get -y update
 
-#################################################################
-# Authentication
-# 'root' user by your cloud provider (e.g., Linode, Vultr).
-#################################################################
+
 # start tmux session
 # set up tailscale ssh
 sudo -u $NEW_USER tailscale up --ssh
@@ -191,7 +188,6 @@ sudo -u $NEW_USER tailscale up --ssh
 # note: this requires a server with ipv4 enabled, as github doesn't support ipv6 yet (2025-08-21)
 sudo -u $NEW_USER ghlogin
 
-tmux
 
 # clone repos
 gh repo clone silvermine-ai/mywealth.silvermine.ai
@@ -200,5 +196,10 @@ gh repo clone silvermine-ai/do.silvermine.ai
 gh repo clone silvermine-ai/www.silvermine.ai
 gh repo clone silvermine-ai/familiawindows.silvermine.ai
 
+#################################################################
+# Authentication
+# 'root' user by your cloud provider (e.g., Linode, Vultr).
+#################################################################
+tmux
 # cd mywealth.silvermine.ai
 # omnara
