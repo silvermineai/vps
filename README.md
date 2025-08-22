@@ -21,9 +21,18 @@ ssh root-${name} 'curl -sSL https://raw.githubusercontent.com/silvermineai/vps/m
 ```
 Set up termius (with tailscale enabled):
 1. New Host
-1. IP or hostname (name of instance)
+1. Tailscale IP or hostname (name of instance)
 1. user: b
 1. save
+
+You can now port-forward just by doing `npm run dev` to serve your app, and then on 
+
+Run lighthouse report:
+```
+npm run build
+cd dist/ && http-server -p 8080 .
+npx lighthouse http://localhost:8080 --output=html --output-path=./seo-report.html --chrome-flags="--headless"
+```
 
 
 # Intro
