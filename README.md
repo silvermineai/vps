@@ -3,25 +3,28 @@ Inspired by https://github.com/MarcoWorms/vibecoder-fullstack-vps-quickstart.
 
 # Quick Notes
 This is the script I use (using some bash aliases to speed things up) to log in and set up the first time.
+See ~/.zshrc for hnew and ssh-add-host commands, which create a new cloud instance, and add ssh.
 ```
 # create a new vps - see ~/.zshrc for the hnew command
-export name=wf
+export name=wfx
 hnew ${name}
 
-# get the IP and add to ~/.ssh/config. See .zshrc for ssh-add-host command
-export IP=$(hcloud server describe wf -o 'format={{.PublicNet.IPv4.IP}}')
+export IP=$(hcloud server describe ${name} -o 'format={{.PublicNet.IPv4.IP}}')
 ssh-add-host root-${name} root@${IP} ~/.ssh/hetzner
-
-# clean up the ip address so you can ssh (only required if re-using the ${name})
 ssh-keygen -R ${IP}
 
 # run the startup script:
 ssh root-${name} 'curl -sSL https://raw.githubusercontent.com/silvermineai/vps/main/startup.sh | sudo bash && sudo reboot'
 
 # << Do final authentication scripts>>
-# 
-
+#  Set up termius (see below)
 ```
+Set up termius (with tailscale enabled):
+1. New Host
+1. IP or hostname (name of instance)
+1. user: b
+1. save
+
 
 # Intro
 Security:

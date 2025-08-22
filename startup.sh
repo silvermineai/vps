@@ -136,6 +136,8 @@ ghpull() {
   gh repo clone silvermineai/www.silvermine.ai
   gh repo clone silvermineai/familiawindows.silvermine.ai
 }
+
+alias auth="ghlogin && ghpull && omnara"
 EOF
 
 # Make the newly created script executable (optional, but good practice)
@@ -207,13 +209,14 @@ echo "✅ Tailscale Started."
 cat <<EOF
 ----Finished. Next steps:----
 # check tailscale status: https://login.tailscale.com/admin/machines
-ts status
+tailscale status
 
 # login:
 ssh b@$(hostname)
 
 # authenticate
-ghlogin && ghpull && omnara
+auth
+
 # close out to enter tmux session
 
 # start tmux session
