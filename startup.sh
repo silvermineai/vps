@@ -104,7 +104,7 @@ echo "🎉 Server Hardening Complete! 🎉"
 # had to hard-code the profile path for some reason as ${PROFILE} was not working
 cat << 'EOF' >> /home/b/.bashrc
 export IS_SANDBOX=1;
-alias omnara="export IS_SANDBOX=1; omnara --dangerously-skip-permissions"
+alias omnara="export IS_SANDBOX=1; /home/b/.venv/bin/omnara --dangerously-skip-permissions"
 alias yolo="claude --dangerously-skip-permissions"
 alias t="tmux a -d"
 
@@ -203,8 +203,10 @@ echo "✅ Tailscale Started."
 # Start Running
 # 'root' user by your cloud provider (e.g., Linode, Vultr).
 #################################################################
+echo """
 tmux
-# ghlogin
-# ghpull
+ghlogin
+ghpull
 # cd mywealth.silvermine.ai
-# omnara
+omnara
+"""

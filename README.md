@@ -68,8 +68,8 @@ export IP=5.78.41.48
 ssh-add-host ${name} root@${IP} ~/.ssh/hetzner
 # clean up the ip address
 ssh-keygen -R ${IP}
-ssh wfp
-curl -sSL https://raw.githubusercontent.com/silvermineai/vps/main/startup.sh | sudo bash
+# run the startup script:
+ssh root-${name} 'curl -sSL https://raw.githubusercontent.com/silvermineai/vps/main/startup.sh | sudo bash && sudo reboot'
 ```
 
 
