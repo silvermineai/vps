@@ -203,10 +203,18 @@ echo "✅ Tailscale Started."
 # Start Running
 # 'root' user by your cloud provider (e.g., Linode, Vultr).
 #################################################################
-echo """
+cat <<EOF
+----Finished. Next steps:----
+# login:
+ssh b@$(hostname)
+
+# authenticate
+ghlogin && ghpull
+omnara
+# close out to enter tmux session
+
+# start tmux session
 tmux
-ghlogin
-ghpull
 # cd mywealth.silvermine.ai
 omnara
-"""
+EOF
