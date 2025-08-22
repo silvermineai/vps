@@ -1,6 +1,20 @@
 # VPS
 Inspired by https://github.com/MarcoWorms/vibecoder-fullstack-vps-quickstart.
 
+# Quick Notes
+This is the script I use (using some bash aliases to speed things up) to log in and set up the first time.
+```
+export name=wf
+hnew ${name}
+export IP=$(hcloud server describe wf -o 'format={{.PublicNet.IPv4.IP}}')
+ssh-add-host root-${name} root@${IP} ~/.ssh/hetzner
+# clean up the ip address
+ssh-keygen -R ${IP}
+# run the startup script:
+ssh root-${name} 'curl -sSL https://raw.githubusercontent.com/silvermineai/vps/main/startup.sh | sudo bash && sudo reboot'
+```
+
+# Intro
 Security:
 1. Sets up new user 
 1. Enable ufp
@@ -60,22 +74,4 @@ hcloud server create \
 1. Set up [tailscale ssh](https://tailscale.com/kb/1193/tailscale-ssh)
 1. Log in with `ssh root@ubuntu-2gb-hil-1` (change the name and what not).
 
-# Fastest mode (using my own)
-```
-export name=wfp
-hnew ${name}
-export IP=5.78.41.48
-ssh-add-host ${name} root@${IP} ~/.ssh/hetzner
-# clean up the ip address
-ssh-keygen -R ${IP}
-# run the startup script:
-ssh root-${name} 'curl -sSL https://raw.githubusercontent.com/silvermineai/vps/main/startup.sh | sudo bash && sudo reboot'
-```
 
-
-1. sudo tailscale up --ssh
-
-
-## Troubleshooting
-
-cat ~/.ssh/authorized_keys
