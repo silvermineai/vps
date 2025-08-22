@@ -196,6 +196,7 @@ echo "✅ Final Updates Complete."
 # start tmux session
 # set up tailscale ssh
 echo "--- Starting Tailscale ---"
+sudo tailscale set --operator=$NEW_USER
 tailscale up --ssh
 echo "✅ Tailscale Started."
 
@@ -205,12 +206,14 @@ echo "✅ Tailscale Started."
 #################################################################
 cat <<EOF
 ----Finished. Next steps:----
+# check tailscale status: https://login.tailscale.com/admin/machines
+ts status
+
 # login:
 ssh b@$(hostname)
 
 # authenticate
-ghlogin && ghpull
-omnara
+ghlogin && ghpull && omnara
 # close out to enter tmux session
 
 # start tmux session
