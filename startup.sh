@@ -138,6 +138,11 @@ ghpull() {
 }
 
 alias auth="ghlogin && ghpull && omnara"
+
+git config --global pull.rebase false
+git config --global user.name "Silvermine AI"
+git config --global user.name "code@silvermineai.com"
+
 EOF
 
 # Make the newly created script executable (optional, but good practice)
