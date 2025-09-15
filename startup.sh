@@ -137,6 +137,9 @@ ghpull() {
   gh repo clone silvermineai/familiawindows.silvermine.ai
 }
 
+sudo tailscale set --operator=b
+tailscale up --ssh
+
 alias auth="ghlogin && ghpull && omnara"
 
 git config --global pull.rebase false
