@@ -137,7 +137,7 @@ ghpull() {
   gh repo clone silvermineai/familiawindows.silvermine.ai
 }
 
-sudo tailscale set --operator=b
+# enable tailscale on startup (if server crashes)
 tailscale up --ssh
 
 alias auth="ghlogin && ghpull && omnara"

@@ -4,6 +4,7 @@ Inspired by https://github.com/MarcoWorms/vibecoder-fullstack-vps-quickstart.
 # Quick Notes
 This is the script I use (using some bash aliases to speed things up) to log in and set up the first time.
 See ~/.zshrc for hnew and ssh-add-host commands, which create a new cloud instance, and add ssh.
+
 ```
 # create a new vps - see ~/.zshrc for the hnew command
 export name=wfx
